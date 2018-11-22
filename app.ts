@@ -1,22 +1,16 @@
 'use strict';
 
-import * as restify from 'restify';
+import { Server } from './server/server';
 
 (function(){
-
-    const server = restify.createServer({
-        name: 'apimeat',
-        version: '1.0.0'
-    });
-
-    server.get('/', (request, response, next) => {
-
-        response.json({message: 'Hello World!'});
-        return next();
-    });
-
-    server.listen(3000, () => {
-
-        console.log("API is running on http://localhost:3000");
+    
+    const server = new Server();
+    
+    server.bootstrap().then(server => {
+        console.log('Server is listen on: ', server.app.address());
     })
+    .catch((error) => {
+        console.log(error);
+        process.exit(1);
+    });
 })();
