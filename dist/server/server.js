@@ -6,12 +6,21 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var restify = __importStar(require("restify"));
+var mongoose_1 = __importDefault(require("mongoose"));
 var environment_1 = require("../common/environment");
 var Server = /** @class */ (function () {
     function Server() {
     }
+    Server.prototype.initializeDB = function () {
+        return mongoose_1.default.connect(environment_1.environment.db.url, {
+            useNewUrlParser: true
+        });
+    };
     Server.prototype.initRoutes = function (routers) {
         var _this = this;
         return new Promise(function (resolve, reject) {
@@ -37,7 +46,11 @@ var Server = /** @class */ (function () {
     Server.prototype.bootstrap = function (routers) {
         var _this = this;
         if (routers === void 0) { routers = []; }
-        return this.initRoutes(routers).then(function () { return _this; });
+        return this.initializeDB().then(function () {
+            return _this.initRoutes(routers).then(function () {
+                return _this;
+            });
+        });
     };
     return Server;
 }());

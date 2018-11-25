@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/danielgomesmateus/apimeat#readme",
   "dependencies": {
+    "mongoose": "^5.3.13",
     "restify": "^7.2.3"
   },
   "devDependencies": {
+    "@types/mongoose": "^5.3.1",
     "@types/restify": "^7.2.6"
   }
 }

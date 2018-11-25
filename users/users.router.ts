@@ -21,9 +21,6 @@ class UsersRouter extends Router {
                 return next();
             });
         });
-        app.get('/users/add', (request, response, next) => {
-            response.json({message: 'adicionar usuários'});
-        });
     }
 }
 

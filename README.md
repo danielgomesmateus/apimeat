@@ -17,6 +17,7 @@ git clone https://github.com/danielgomesmateus/apimeat.git
 - restify
 - nodemon
 - typescript
+- mongoose
 
 ### Instalação
 

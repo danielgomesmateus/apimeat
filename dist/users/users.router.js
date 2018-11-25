@@ -38,9 +38,6 @@ var UsersRouter = /** @class */ (function (_super) {
                 return next();
             });
         });
-        app.get('/users/add', function (request, response, next) {
-            response.json({ message: 'adicionar usuários' });
-        });
     };
     return UsersRouter;
 }(router_1.Router));
