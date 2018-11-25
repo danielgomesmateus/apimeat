@@ -1,24 +1,24 @@
 import { Router } from '../common/router';
 import * as restify from 'restify';
-import { UsersModel } from './users.model';
+import { UserModel } from './users.model';
 
 class UsersRouter extends Router {
     applyRoutes(app: restify.Server) {
         app.get('/users', (request, response, next) => {
-            UsersModel.findAll().then(users => {
+            UserModel.find({}).then((users) => {
                 response.json(users);
                 return next();
             });
         });
         app.get('/users/:id', (request, response, next) => {
-            UsersModel.findById(request.params.id).then(user => {
+            UserModel.findById(request.params.id).then((user) => {
                 if(user) {
                     response.json(user);
+                    return next();
                 }
                 else {
                     response.send(404);
                 }
-                return next();
             });
         });
     }

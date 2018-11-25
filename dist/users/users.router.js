@@ -22,20 +22,20 @@ var UsersRouter = /** @class */ (function (_super) {
     }
     UsersRouter.prototype.applyRoutes = function (app) {
         app.get('/users', function (request, response, next) {
-            users_model_1.UsersModel.findAll().then(function (users) {
+            users_model_1.UserModel.find({}).then(function (users) {
                 response.json(users);
                 return next();
             });
         });
         app.get('/users/:id', function (request, response, next) {
-            users_model_1.UsersModel.findById(request.params.id).then(function (user) {
+            users_model_1.UserModel.findById(request.params.id).then(function (user) {
                 if (user) {
                     response.json(user);
+                    return next();
                 }
                 else {
                     response.send(404);
                 }
-                return next();
             });
         });
     };
