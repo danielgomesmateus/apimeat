@@ -1,16 +1,12 @@
-'use strict';
-
 import { Server } from './server/server';
+import { usersRouter } from './users/users.router';
 
-(function(){
-    
-    const server = new Server();
-    
-    server.bootstrap().then(server => {
-        console.log('Server is listen on: ', server.app.address());
-    })
-    .catch((error) => {
-        console.log(error);
-        process.exit(1);
-    });
-})();
+const server = new Server();
+
+server.bootstrap([usersRouter]).then(server => {
+    console.log('Server is listen on: ', server.app.address());
+})
+.catch((error) => {
+    console.log(error);
+    process.exit(1);
+});
